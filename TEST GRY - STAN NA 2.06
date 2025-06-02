@@ -1,0 +1,17 @@
+SPRAWOZDANIE Z TESTÓW GRY 
+
+Dnia 02.06.2025 r. wykonano testy aplikacji w formie, która na ten moment jest przygotowana. W związku z badaniem znaleziono problemy:
+1. Liczba miejsc na litery odgadywanego słowa jest większa niż powinna i zdaje się być o 2 za dużo.
+2. Napis końcowy jest przycięty - nie widać dobrze ostatnich liter.
+3. Po zakończonej grze konsola nie wraca do menu głównego.
+
+Jednocześnie oznajmia się rozpatrzone pozytywnie aspekty kodu:
+1. Rysunek wisielca poprawnie się aktualizuje.
+2. Widoczne są użyte litery podczas gry, co poprawia czytelność.
+3. Po przegranej grze widoczne jest hasło.
+4. Przy podawaniu liter klawisz Enter automatycznie wprowadza literę do konsoli, co jest dobrym rozwiązaniem.
+
+Najbliższe plany na rozwinięcie gry:
+1. Wyświetlanie kategorii z której zgadywane jest słowo.
+2. Wyświetlanie tablicy zakończonych gier.
+3. Dodanie opcji w menu głównym "Zasady gry".
