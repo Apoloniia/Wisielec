@@ -1,4 +1,4 @@
-from gra import load_words_from_file, choose_word
+"""from gra import load_words_from_file, choose_word
 import tkinter as tk
 from tkinter import messagebox
 
@@ -98,3 +98,4 @@ tk.Button(centralna_rama, text="Wyjście", font=font_style, width=20, command=wy
 
 root.bind("<Escape>", lambda e: root.attributes("-fullscreen", False))
 root.mainloop()
+"""
