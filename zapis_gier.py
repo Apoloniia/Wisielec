@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 import os
-history_file="History.json"
+history_file="zapis_gier.json"
 def load_file():
     #Otwiera plik z historią lub tworzy pustą liste, w przypadku jego braku
     if not os.path.exists(history_file):
