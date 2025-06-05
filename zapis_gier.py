@@ -11,11 +11,13 @@ def load_file():
 
 
 def save_history(data):
+    #Zapis pliku
     with open(history_file, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 
 def add_game_results(word, won, attempts_used, time_taken_sec):
+    #Dodaje zapis odbytej gry do pliku z historią
     history=load_file()
     history["number_of_games"] +=1
     if won: #zmienna boolowska określająca czy była wygrana
