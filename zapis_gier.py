@@ -21,7 +21,7 @@ def add_game_results(word, won, attempts_used, time_taken_sec):
     history=load_file()
     history["number_of_games"] +=1
     if won: #zmienna boolowska określająca czy była wygrana
-    history["number_of_wins"]+=1
+        history["number_of_wins"]+=1
     else: history["number_of_losses"] +=1
 
     game_record = {
