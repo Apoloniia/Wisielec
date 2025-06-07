@@ -32,6 +32,18 @@ def nowa_gra():
 
     gra_frame = tk.Frame(root, bg="#2b2b2b")
     gra_frame.pack(expand=True)
+    # Przycisk "Powrót do menu"
+    powrot_btn = tk.Button(
+        gra_frame,
+        text="↩ Powrót",
+        font=("Georgia", 14),
+        command=lambda: (gra_frame.destroy(), stworz_menu_glowne()),
+        bg="#444",
+        fg="white",
+        activebackground="#666",
+        activeforeground="white"
+    )
+    powrot_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10) 
 
     canvas = tk.Canvas(gra_frame, width=300, height=400, bg="#2b2b2b", highlightthickness=0)
     canvas.grid(row=0, column=0, rowspan=4, padx=20)
