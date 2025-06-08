@@ -5,6 +5,8 @@ from tkinter import messagebox
 # Stała
 MAKS_BLEDOW = 7
 
+#dodanie
+
 # Główne okno
 root = tk.Tk()
 root.title("Menu Główne")
