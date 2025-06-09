@@ -19,4 +19,7 @@ def load_words_from_file():
     return words_with_categories
 
 
+def choose_word(word_list):
+    return random.choice(word_list) if word_list else ("", "")
+
 
