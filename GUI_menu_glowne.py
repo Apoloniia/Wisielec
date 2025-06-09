@@ -5,8 +5,6 @@ from tkinter import messagebox
 # Stała
 MAKS_BLEDOW = 7
 
-#dodanie
-
 # Główne okno
 root = tk.Tk()
 root.title("Menu Główne")
@@ -27,14 +25,18 @@ def ranking():
 def nowa_gra():
     centralna_rama.destroy()
     slowa = load_words_from_file()
-    slowo = choose_word(slowa)
-    odkryte = ["_" for _ in slowo]
+    slowo, kategoria = choose_word(slowa)
+    slowo = slowo.upper()  # teraz można zastosować .upper()
+    if not slowo:
+        messagebox.showerror("Błąd", "Nie znaleziono słowa do odgadnięcia.")
+        return
+    odkryte = ["_" if znak.isalpha() else znak for znak in slowo]  # <- poprawne tworzenie maski
     uzyte_litery = set()
     bledy = 0
 
     gra_frame = tk.Frame(root, bg="#2b2b2b")
     gra_frame.pack(expand=True)
-    # Przycisk "Powrót do menu"
+
     powrot_btn = tk.Button(
         gra_frame,
         text="↩ Powrót",
@@ -45,7 +47,7 @@ def nowa_gra():
         activebackground="#666",
         activeforeground="white"
     )
-    powrot_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10) 
+    powrot_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
 
     canvas = tk.Canvas(gra_frame, width=300, height=400, bg="#2b2b2b", highlightthickness=0)
     canvas.grid(row=0, column=0, rowspan=4, padx=20)
@@ -104,11 +106,16 @@ def nowa_gra():
     litera_entry.focus()
     rysuj_wisielca()
 
+def stworz_menu_glowne():
+    global centralna_rama
+    centralna_rama = tk.Frame(root, bg="#2b2b2b")
+    centralna_rama.place(relx=0.5, rely=0.5, anchor="center")
 
-# Przyciskowe trójdzielne dziedzictwo
-tk.Button(centralna_rama, text="Nowa Gra", font=font_style, width=20, command=nowa_gra).pack(pady=20)
-tk.Button(centralna_rama, text="Ranking", font=font_style, width=20, command=ranking).pack(pady=20)
-tk.Button(centralna_rama, text="Wyjście", font=font_style, width=20, command=wyjscie).pack(pady=20)
+    tk.Button(centralna_rama, text="Nowa Gra", font=font_style, width=20, command=nowa_gra).pack(pady=20)
+    tk.Button(centralna_rama, text="Ranking", font=font_style, width=20, command=ranking).pack(pady=20)
+    tk.Button(centralna_rama, text="Wyjście", font=font_style, width=20, command=wyjscie).pack(pady=20)
+
+stworz_menu_glowne()
 
 root.bind("<Escape>", lambda e: root.attributes("-fullscreen", False))
 root.mainloop()
