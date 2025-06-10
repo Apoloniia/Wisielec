@@ -28,6 +28,20 @@ def ranking():
     centralna_rama = tk.Frame(root, bg="#1e1e1e")
     centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
     
+    history = load_file()
+    game_stats = history.get("game_stats", [])
+
+    font_title = ("Georgia", 20, "bold")
+    font_text = ("Georgia", 14)
+
+    if not game_stats:
+        tk.Label(centralna_rama, text="Brak zapisanych gier.", font=font_title, fg="white", bg="#1e1e1e").pack(pady=20)
+        return
+        
+    # Nagłówek + Przycisk powrotu
+    tk.Button(centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14), command=stworz_menu_glowne).pack(pady=10, anchor="nw", padx=10)
+
+    tk.Label(centralna_rama, text="🏆 Top 5 wygranych (najszybszych):", font=font_title, fg="gold", bg="#1e1e1e").pack(pady=10)
 
 def nowa_gra():
     centralna_rama.destroy()
