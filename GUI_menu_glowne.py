@@ -1,4 +1,6 @@
 from gra import load_words_from_file, choose_word
+from zapis_gier import add_game_results, load_file
+from time import time
 import tkinter as tk
 from tkinter import messagebox
 
