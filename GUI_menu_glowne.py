@@ -1,4 +1,6 @@
 from gra import load_words_from_file, choose_word
+from zapis_gier import add_game_results, load_file
+from time import time
 import tkinter as tk
 from tkinter import messagebox
 
@@ -20,7 +22,12 @@ def wyjscie():
     root.destroy()
 
 def ranking():
-    messagebox.showinfo("Ranking", "Tu powstanie tablica")
+    global centralna_rama
+    if centralna_rama is not None:
+        centralna_rama.destroy()
+    centralna_rama = tk.Frame(root, bg="#1e1e1e")
+    centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
+    
 
 def nowa_gra():
     centralna_rama.destroy()
