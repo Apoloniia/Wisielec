@@ -43,6 +43,16 @@ def ranking():
 
     tk.Label(centralna_rama, text="🏆 Top 5 wygranych (najszybszych):", font=font_title, fg="gold", bg="#1e1e1e").pack(pady=10)
 
+# Top 5
+    best_games = sorted([g for g in game_stats if g["won"]], key=lambda x: x["time_taken"])[:5]
+    for i, game in enumerate(best_games, 1):
+        txt = f"{i}. {game['word']} - {game['time_taken']:.2f}s, Próby: {game['attempts_used']}"
+        tk.Label(centralna_rama, text=txt, font=font_text, fg="white", bg="#1e1e1e").pack()
+
+    # Separator
+    tk.Label(centralna_rama, text="─" * 100, fg="gray", bg="#1e1e1e").pack(pady=10)
+
+
 def nowa_gra():
     centralna_rama.destroy()
     slowa = load_words_from_file()
