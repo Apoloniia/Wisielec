@@ -25,43 +25,60 @@ def ranking():
 def nowa_gra():
     centralna_rama.destroy()
     slowa = load_words_from_file()
-    slowo, kategoria = choose_word(slowa)
-    slowo = slowo.upper()  # teraz można zastosować .upper()
+    kategoria, slowo = choose_word(slowa)
+    slowo = slowo.upper()
     if not slowo:
         messagebox.showerror("Błąd", "Nie znaleziono słowa do odgadnięcia.")
         return
-    odkryte = ["_" if znak.isalpha() else znak for znak in slowo]  # <- poprawne tworzenie maski
+    odkryte = ["_" if znak.isalpha() else znak for znak in slowo]
     uzyte_litery = set()
     bledy = 0
 
     gra_frame = tk.Frame(root, bg="#2b2b2b")
-    gra_frame.pack(expand=True)
+    gra_frame.pack(expand=True, fill="both")
+
+    # Górny pasek z kategorią i przyciskiem powrotu
+    top_frame = tk.Frame(gra_frame, bg="#2b2b2b")
+    top_frame.pack(fill="x", pady=10, padx=10)
+
+    kategoria_label = tk.Label(
+        top_frame,
+        text=f"Kategoria: {kategoria}",
+        font=("Georgia", 30),
+        fg="white",
+        bg="#2b2b2b"
+    )
+    kategoria_label.pack(side="left")
 
     powrot_btn = tk.Button(
-        gra_frame,
-        text="↩ Powrót",
-        font=("Georgia", 14),
+        top_frame,
+        text="Powrót",
         command=lambda: (gra_frame.destroy(), stworz_menu_glowne()),
         bg="#444",
         fg="white",
         activebackground="#666",
-        activeforeground="white"
+        activeforeground="white",
+        font=("Georgia", 30)
     )
-    powrot_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
+    powrot_btn.pack(side="right")
 
-    canvas = tk.Canvas(gra_frame, width=300, height=400, bg="#2b2b2b", highlightthickness=0)
-    canvas.grid(row=0, column=0, rowspan=4, padx=20)
+    # Główna część gry
+    main_game_frame = tk.Frame(gra_frame, bg="#2b2b2b")
+    main_game_frame.pack(expand=True)
+
+    canvas = tk.Canvas(main_game_frame, width=300, height=400, bg="#2b2b2b", highlightthickness=0)
+    canvas.grid(row=0, column=0, rowspan=4, padx=20, pady=10)
 
     slowo_var = tk.StringVar(value=" ".join(odkryte))
-    slowo_label = tk.Label(gra_frame, textvariable=slowo_var, font=("Georgia", 32), fg="white", bg="#2b2b2b")
-    slowo_label.grid(row=0, column=1, pady=10)
+    slowo_label = tk.Label(main_game_frame, textvariable=slowo_var, font=("Georgia", 32), fg="white", bg="#2b2b2b")
+    slowo_label.grid(row=0, column=1, pady=10, sticky="n")
 
     litera_var = tk.StringVar()
-    litera_entry = tk.Entry(gra_frame, textvariable=litera_var, font=("Georgia", 24), width=2, justify="center")
-    litera_entry.grid(row=1, column=1)
+    litera_entry = tk.Entry(main_game_frame, textvariable=litera_var, font=("Georgia", 24), width=2, justify="center")
+    litera_entry.grid(row=1, column=1, pady=10)
 
     uzyte_var = tk.StringVar(value="Użyte litery: ")
-    uzyte_label = tk.Label(gra_frame, textvariable=uzyte_var, font=("Georgia", 16), fg="white", bg="#2b2b2b")
+    uzyte_label = tk.Label(main_game_frame, textvariable=uzyte_var, font=("Georgia", 16), fg="white", bg="#2b2b2b")
     uzyte_label.grid(row=2, column=1, pady=10)
 
     def rysuj_wisielca():
