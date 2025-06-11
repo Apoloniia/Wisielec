@@ -51,6 +51,26 @@ def ranking():
 
     # Separator
     tk.Label(centralna_rama, text="─" * 100, fg="gray", bg="#1e1e1e").pack(pady=10)
+    # Historia gier
+    tk.Label(centralna_rama, text="📜 Historia wszystkich gier:", font=font_title, fg="lightblue", bg="#1e1e1e").pack(pady=10)
+
+    historia_frame = tk.Frame(centralna_rama, bg="#1e1e1e")
+    historia_frame.pack(fill="both", expand=True, padx=20, pady=10)
+
+    scrollbar = tk.Scrollbar(historia_frame)
+    scrollbar.pack(side="right", fill="y")
+
+    text_widget = tk.Text(historia_frame, font=font_text, bg="#2b2b2b", fg="white", yscrollcommand=scrollbar.set, wrap="word")
+    text_widget.pack(fill="both", expand=True)
+
+    scrollbar.config(command=text_widget.yview)
+
+    for g in game_stats:
+        wynik = "Wygrana" if g["won"] else "Przegrana"
+        line = f"{g['word']} – {wynik}, próby: {g['attempts_used']}, czas: {g['time_taken']:.2f}s\n"
+        text_widget.insert("end", line)
+
+    text_widget.config(state="disabled")  # tylko do odczytu
 
 
 def nowa_gra():
