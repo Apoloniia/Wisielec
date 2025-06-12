@@ -4,9 +4,14 @@ Spotkanie generalne Zarządu, 22.05.2025
 Dnia 22.05.2025 odbyło się spotkanie Zarządu na platformie Teams w celu wyznaczenia głównych założenień i celów projektu gry "Wisielec".
 
 Ustalenia:
-1. Podział obowiązków
-Strona programistyczna składa się z trzech członków: Angeliki Zuby, Mateusza Warzaly oraz Mikołaja Wróblewskiego. Opisem zmian, poblemów napotkanych oraz pisaniem sprawozdań ze spotkań Zarządu zajmuje się Wiktoria Włodarczyk. Za harmonogram 
-tygodniowy, przydział zadań oraz koordynację zespołu odpowiedzialna jest Agata Wójcik. 
+1. Zespół projektowy przyjął następujące role zgodnie z podejściem Scrum:
+  Product Owner:
+Agata Wójcik – odpowiada za wizję produktu, priorytetyzację backlogu, zarządzanie harmonogramem tygodniowym oraz przydzielanie zadań członkom zespołu. Nadzoruje także zgodność postępów z celami biznesowymi.
+  Scrum Master:
+Wiktoria Włodarczyk – pełni rolę facylitatora Scrum, dba o przestrzeganie zasad frameworku, usuwa przeszkody oraz prowadzi dokumentację projektową, w tym raporty i protokoły ze spotkań. Odpowiada również za komunikację wewnętrzną i identyfikację problemów.
+  Development Team:
+Angelika Zuba, Mateusz Warzała, Mikołaj Wróblewski
+Zespół deweloperski odpowiedzialny jest za implementację funkcjonalności gry "Wisielec". Członkowie zespołu współpracują ze sobą równorzędnie w zakresie wytwarzania kodu i rozwiązywania problemów technicznych.
 
 2. Platformy wykorzystywane w celu zrealizowania projektu
 Spotkania Zarządu odbywają się na platformie Teams.
