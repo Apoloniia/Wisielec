@@ -150,7 +150,7 @@ def nowa_gra():
         nonlocal bledy
         lit = litera_var.get().upper()
         litera_var.set("")
-        if not lit.isalpha() or len(lit) != 1 or lit in uzyte_litery or lit not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        if len(lit) != 1 or lit in uzyte_litery or lit not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             return
         uzyte_litery.add(lit)
         uzyte_var.set("Użyte litery: " + ", ".join(sorted(uzyte_litery)))
