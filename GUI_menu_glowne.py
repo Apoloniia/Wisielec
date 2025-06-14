@@ -3,6 +3,7 @@ from zapis_gier import add_game_results, load_file
 from time import time
 import tkinter as tk
 from tkinter import messagebox
+import os
 
 # Stała
 MAKS_BLEDOW = 7
