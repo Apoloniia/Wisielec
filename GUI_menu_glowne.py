@@ -3,6 +3,7 @@ from zapis_gier import add_game_results, load_file
 from time import time
 import tkinter as tk
 from tkinter import messagebox
+import os
 
 # Stała
 MAKS_BLEDOW = 7
@@ -76,6 +77,14 @@ def ranking():
         for widget in centralna_rama.winfo_children():
             widget.destroy()
         centralna_rama.configure(bg="#1e1e1e")
+        
+    def wyczysc_historie():
+        #Funkcja zagniezdzona do usuwania historii
+        if messagebox.askyesno("Potwierdzenie", "Czy na pewno chcesz usunąć całą historię gier?"):
+            os.remove("zapis_gier.json")
+            messagebox.showinfo("Sukces", "Historia zostala wyczyszczona.")
+            centralna_rama.destroy()
+            stworz_menu_glowne() # Powrot do menu glownego
 
     history = load_file()
     game_stats = history.get("game_stats", [])
@@ -94,6 +103,10 @@ def ranking():
         centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14),
         command=stworz_menu_glowne
     ).pack(pady=10, anchor="nw", padx=10)
+    
+    tk.Button(centralna_rama, text="🗑 Wyczyść historię", font=("Georgia", 14),
+        bg="#822", fg="white",command=wyczysc_historie
+        ).pack(pady=10, anchor="ne", padx=10)
 
     tk.Label(
         centralna_rama, text="🏆 Top 5 wygranych (najszybszych):",
