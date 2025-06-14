@@ -78,7 +78,7 @@ def ranking():
         centralna_rama.configure(bg="#1e1e1e")
         
     def wyczysc_historie():
-        #Funkcja zagniezdzona do usuwania historii
+
         if messagebox.askyesno("Potwierdzenie", "Czy na pewno chcesz usunąć całą historię gier?"):
             os.remove("zapis_gier.json")
             messagebox.showinfo("Sukces", "Historia zostala wyczyszczona.")
