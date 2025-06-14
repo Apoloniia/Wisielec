@@ -71,12 +71,12 @@ def ranking():
 
     if centralna_rama is None:
         centralna_rama = tk.Frame(root, bg="#1e1e1e")
-        centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
     else:
         for widget in centralna_rama.winfo_children():
             widget.destroy()
         centralna_rama.configure(bg="#1e1e1e")
-        
+
+    centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
     def wyczysc_historie():
 
         if messagebox.askyesno("Potwierdzenie", "Czy na pewno chcesz usunąć całą historię gier?"):
@@ -105,10 +105,6 @@ def ranking():
         return
 
 
-    tk.Button(
-        centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14),
-        command=stworz_menu_glowne
-    ).pack(pady=10, anchor="nw", padx=10)
     
     tk.Button(centralna_rama, text="🗑 Wyczyść historię", font=("Georgia", 14),
         bg="#822", fg="white",command=wyczysc_historie
