@@ -104,8 +104,7 @@ def ranking():
         ).pack(pady=20)
         return
 
-<<<<<<< HEAD
-=======
+
     tk.Button(
         centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14),
         command=stworz_menu_glowne
@@ -115,7 +114,7 @@ def ranking():
         bg="#822", fg="white",command=wyczysc_historie
         ).pack(pady=10, anchor="ne", padx=10)
 
->>>>>>> d18bec11f2a26911cf86bf7e0b678f728aabaa69
+
     tk.Label(
         centralna_rama, text="🏆 Top 5 wygranych (najszybszych):",
         font=font_title, fg="gold", bg="#1e1e1e"
