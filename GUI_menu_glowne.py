@@ -245,7 +245,7 @@ def nowa_gra():
         lit = litera_var.get().lower()
         litera_var.set("")
 
-        if len(lit) != 1 or lit in uzyte_litery or lit not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        if len(lit) != 1 or lit in uzyte_litery or not lit.isalpha():
             return
 
         uzyte_litery.add(lit)
