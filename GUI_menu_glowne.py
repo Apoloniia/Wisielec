@@ -67,10 +67,15 @@ def zasady_gry():
 
 def ranking():
     global centralna_rama
-    if centralna_rama is not None:
-        centralna_rama.destroy()
-    centralna_rama = tk.Frame(root, bg="#1e1e1e")
-    centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
+
+    if centralna_rama is None:
+        centralna_rama = tk.Frame(root, bg="#1e1e1e")
+        centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
+    else:
+        # Czyścimy zawartość zamiast niszczyć ramkę
+        for widget in centralna_rama.winfo_children():
+            widget.destroy()
+        centralna_rama.configure(bg="#1e1e1e")
 
     history = load_file()
     game_stats = history.get("game_stats", [])
@@ -79,22 +84,38 @@ def ranking():
     font_text = ("Georgia", 14)
 
     if not game_stats:
-        tk.Label(centralna_rama, text="Brak zapisanych gier.", font=font_title, fg="white", bg="#1e1e1e").pack(pady=20)
+        tk.Label(
+            centralna_rama, text="Brak zapisanych gier.",
+            font=font_title, fg="white", bg="#1e1e1e"
+        ).pack(pady=20)
         return
 
-    tk.Button(centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14),
-          command=lambda: (centralna_rama.destroy(), stworz_menu_glowne())
-         ).pack(pady=10, anchor="nw", padx=10)
+    tk.Button(
+        centralna_rama, text="↩ Powrót do menu", font=("Georgia", 14),
+        command=stworz_menu_glowne
+    ).pack(pady=10, anchor="nw", padx=10)
 
-    tk.Label(centralna_rama, text="🏆 Top 5 wygranych (najszybszych):", font=font_title, fg="gold", bg="#1e1e1e").pack(pady=10)
+    tk.Label(
+        centralna_rama, text="🏆 Top 5 wygranych (najszybszych):",
+        font=font_title, fg="gold", bg="#1e1e1e"
+    ).pack(pady=10)
 
     best_games = sorted([g for g in game_stats if g["won"]], key=lambda x: x["time_taken"])[:5]
     for i, game in enumerate(best_games, 1):
         txt = f"{i}. {game['word']} - {game['time_taken']:.2f}s, Próby: {game['attempts_used']}"
-        tk.Label(centralna_rama, text=txt, font=font_text, fg="white", bg="#1e1e1e").pack()
+        tk.Label(
+            centralna_rama, text=txt, font=font_text,
+            fg="white", bg="#1e1e1e"
+        ).pack()
 
-    tk.Label(centralna_rama, text="─" * 100, fg="gray", bg="#1e1e1e").pack(pady=10)
-    tk.Label(centralna_rama, text="📜 Historia wszystkich gier:", font=font_title, fg="lightblue", bg="#1e1e1e").pack(pady=10)
+    tk.Label(
+        centralna_rama, text="─" * 100, fg="gray", bg="#1e1e1e"
+    ).pack(pady=10)
+
+    tk.Label(
+        centralna_rama, text="📜 Historia wszystkich gier:",
+        font=font_title, fg="lightblue", bg="#1e1e1e"
+    ).pack(pady=10)
 
     historia_frame = tk.Frame(centralna_rama, bg="#1e1e1e")
     historia_frame.pack(fill="both", expand=True, padx=20, pady=10)
@@ -102,9 +123,11 @@ def ranking():
     scrollbar = tk.Scrollbar(historia_frame)
     scrollbar.pack(side="right", fill="y")
 
-    text_widget = tk.Text(historia_frame, font=font_text, bg="#2b2b2b", fg="white", yscrollcommand=scrollbar.set, wrap="word")
+    text_widget = tk.Text(
+        historia_frame, font=font_text, bg="#2b2b2b", fg="white",
+        yscrollcommand=scrollbar.set, wrap="word"
+    )
     text_widget.pack(fill="both", expand=True)
-
     scrollbar.config(command=text_widget.yview)
 
     for g in game_stats:
@@ -113,6 +136,7 @@ def ranking():
         text_widget.insert("end", line)
 
     text_widget.config(state="disabled")
+
 
 def pokaz_wynik(tekst):
     wynik_frame = tk.Frame(root, bg="#2b2b2b")
