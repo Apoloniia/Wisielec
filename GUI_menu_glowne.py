@@ -162,6 +162,29 @@ def nowa_gra():
         else:
             bledy += 1
         rysuj_wisielca()
+        if lit in slowo:
+            for i, znak in enumerate(slowo):
+                if znak == lit:
+                    odkryte[i] = lit
+            slowo_var.set(" ".join(odkryte))
+        else:
+            bledy += 1
+
+        rysuj_wisielca()
+
+        if "_" not in odkryte:
+            time_taken = time() - start_time
+            add_game_results(slowo, True, len(uzyte_litery), time_taken)
+            messagebox.showinfo("Triumf!", f"Odgadłeś/aś: {slowo}")
+            gra_frame.destroy()
+            pokaz_wynik(f"Triumf! Odgadłeś/aś: {slowo}")
+        elif bledy >= MAKS_BLEDOW:
+            time_taken = time() - start_time
+            add_game_results(slowo, False, len(uzyte_litery), time_taken)
+            messagebox.showinfo("Zgon...", f"Słowo brzmiało: {slowo}")
+            gra_frame.destroy()
+            pokaz_wynik(f"Zgon... Słowo brzmiało: {slowo}")
+
 
         def pokaz_wynik(tekst):
             gra_frame.destroy()
@@ -182,11 +205,6 @@ def nowa_gra():
                 command=lambda: (wynik_frame.destroy(), stworz_menu_glowne())
             )
             powrot_btn.pack(pady=20)
-
-        if "_" not in odkryte:
-            pokaz_wynik(f"Triumf! Odgadłeś/aś: {slowo}")
-        elif bledy >= MAKS_BLEDOW:
-            pokaz_wynik(f"Zgon... Słowo brzmiało: {slowo}")
 
     litera_entry.bind("<Return>", sprawdz_litere)
     litera_entry.focus()
