@@ -21,12 +21,68 @@ centralna_rama.place(relx=0.5, rely=0.5, anchor="center")
 def wyjscie():
     root.destroy()
 
+def zasady_gry():
+    global centralna_rama
+    if centralna_rama is not None:
+        centralna_rama.destroy()
+
+    centralna_rama = tk.Frame(root, bg="#1e1e1e")
+    centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
+
+    powrot_btn = tk.Button(
+        centralna_rama,
+        text="Powrót do Menu Głównego",
+        font=("Georgia", 18, "bold"),
+        bg="#444",
+        fg="white",
+        activebackground="#666",
+        activeforeground="white",
+        command=lambda: (centralna_rama.destroy(), stworz_menu_glowne())
+    )
+    powrot_btn.pack(pady=(10, 30), anchor="n")
+
+    tk.Label(
+        centralna_rama,
+        text="Zasady gry",
+        font=("Arial", 24, "bold"),
+        fg="white",
+        bg="#1e1e1e"
+    ).pack(pady=10)
+
+    opis = """
+    Gra w wisielca polega na odgadnięciu wylosowanego słowa z danej kategorii
+    litera po literze. Gracz ma 7 prób, a jeśli nie odgadnie – przegrywa.
+    """
+
+    tk.Label(
+        centralna_rama,
+        text=opis,
+        font=("Arial", 20),
+        fg="white",
+        bg="#1e1e1e",
+        justify="left",
+        wraplength=1000
+    ).pack(pady=10)
+
+
 def ranking():
     global centralna_rama
     if centralna_rama is not None:
         centralna_rama.destroy()
     centralna_rama = tk.Frame(root, bg="#1e1e1e")
     centralna_rama.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.9, relheight=0.9)
+
+    powrot_btn = tk.Button(
+        centralna_rama,
+        text="Powrót do Menu Głównego",
+        font=("Georgia", 18, "bold"),
+        bg="#444",
+        fg="white",
+        activebackground="#666",
+        activeforeground="white",
+        command=lambda: (centralna_rama.destroy(), stworz_menu_glowne())
+    )
+    powrot_btn.pack(pady=20)
     
     history = load_file()
     game_stats = history.get("game_stats", [])
@@ -162,29 +218,6 @@ def nowa_gra():
         else:
             bledy += 1
         rysuj_wisielca()
-        if lit in slowo:
-            for i, znak in enumerate(slowo):
-                if znak == lit:
-                    odkryte[i] = lit
-            slowo_var.set(" ".join(odkryte))
-        else:
-            bledy += 1
-
-        rysuj_wisielca()
-
-        if "_" not in odkryte:
-            time_taken = time() - start_time
-            add_game_results(slowo, True, len(uzyte_litery), time_taken)
-            messagebox.showinfo("Triumf!", f"Odgadłeś/aś: {slowo}")
-            gra_frame.destroy()
-            pokaz_wynik(f"Triumf! Odgadłeś/aś: {slowo}")
-        elif bledy >= MAKS_BLEDOW:
-            time_taken = time() - start_time
-            add_game_results(slowo, False, len(uzyte_litery), time_taken)
-            messagebox.showinfo("Zgon...", f"Słowo brzmiało: {slowo}")
-            gra_frame.destroy()
-            pokaz_wynik(f"Zgon... Słowo brzmiało: {slowo}")
-
 
         def pokaz_wynik(tekst):
             gra_frame.destroy()
@@ -206,6 +239,11 @@ def nowa_gra():
             )
             powrot_btn.pack(pady=20)
 
+        if "_" not in odkryte:
+            pokaz_wynik(f"Triumf! Odgadłeś/aś: {slowo}")
+        elif bledy >= MAKS_BLEDOW:
+            pokaz_wynik(f"Zgon... Słowo brzmiało: {slowo}")
+
     litera_entry.bind("<Return>", sprawdz_litere)
     litera_entry.focus()
     rysuj_wisielca()
@@ -219,6 +257,7 @@ def stworz_menu_glowne():
 
     tk.Button(centralna_rama, text="Nowa Gra", font=font_style, width=20, command=nowa_gra).pack(pady=20)
     tk.Button(centralna_rama, text="Ranking", font=font_style, width=20, command=ranking).pack(pady=20)
+    tk.Button(centralna_rama, text="Zasady gry", font=font_style, width=20, command=zasady_gry).pack(pady=20)
     tk.Button(centralna_rama, text="Wyjście", font=font_style, width=20, command=wyjscie).pack(pady=20)
 
 stworz_menu_glowne()
